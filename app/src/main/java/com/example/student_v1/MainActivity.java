@@ -181,7 +181,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 finish();
-                startActivity(new Intent(getApplicationContext(), Login.class));
+                startActivity(new Intent(getApplicationContext(),Login.class));
             }
         });
     }
