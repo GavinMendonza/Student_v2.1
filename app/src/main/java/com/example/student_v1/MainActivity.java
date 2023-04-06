@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -39,7 +40,7 @@ public class MainActivity extends BaseActivity {
     TextView nameTV,scoreTV, welcomeTV, uidTV, emailTV, className;
     Button logoutBtn;
 
-    String name, uid;
+    String name, uid,classTitle;
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
     @SuppressLint("MissingInflatedId")
@@ -91,10 +92,33 @@ public class MainActivity extends BaseActivity {
                         name= (String) switchMap.get("name");
                         uid= (String) s;
                         emailTV.setText((String) switchMap.get("email"));
-//                        className.setText((String) switchMap.get("class"));
+//                        className.setText(""+switchMap.get("class"));
+//                        className.setText(""+
+//                        database.getReference("class").child(""+switchMap.get("class")).get()
+//                        );
+                        database.getReference("class").child(""+switchMap.get("class")).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                if (!task.isSuccessful()) {
+//                                    Log.e("firebase", "Error getting data", task.getException());
+                                }
+                                else {
+                                    className.setText(""+task.getResult().getValue());
+                                    classTitle =""+task.getResult().getValue();
+
+//                                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
+                                }
+                            }
+                        });
 //                        scoreTV.setText( "Ecc score: "+(Long)switchMap.get("score"));
 //                        scoreMessage="Ecc score: "+switchMap.get("score");
                         scoreTV.setText(""+switchMap.get("score"));
+                        if (Integer.parseInt(""+switchMap.get("score"))>=10){
+                            scoreTV.setTextColor(Color.parseColor("#118042"));
+                        }else {
+                            scoreTV.setTextColor(Color.parseColor("#CF3737"));
+
+                        }
                         Log.d("database", "onDataChange: "+switchMap.get("score"));
                         flag=1;
                     }
@@ -124,7 +148,8 @@ public class MainActivity extends BaseActivity {
         submit.setOnClickListener(view -> {
             Intent i = new Intent(this,MainActivity2.class);
 //            i.putExtra("message_key", name.getText()+"#"+uid.getText()+"#"+className.getText());
-            i.putExtra("message_key", name+"#"+uid+"#"+className);
+            i.putExtra("message_key", name+"#"+uid+"#"+classTitle);
+            Log.d("dbab", "onCreate: "+name+" "+uid+" "+classTitle);
             startActivity(i);
         });
 
@@ -156,7 +181,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 finish();
-                startActivity(new Intent(getApplicationContext(),Login.class));
+                startActivity(new Intent(getApplicationContext(), Login.class));
             }
         });
     }

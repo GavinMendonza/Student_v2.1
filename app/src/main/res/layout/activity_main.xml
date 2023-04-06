@@ -12,12 +12,11 @@
         style="@style/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="24dp"
         android:includeFontPadding="false"
         android:text="@string/generate_qr"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        app:layout_constraintTop_toBottomOf="@+id/class_tv2" />
 
     <TextView
         android:id="@+id/welcome_tv"
@@ -68,6 +67,24 @@
     <!--        style="@style/info_title"-->
     <!--        />-->
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/viewEvent_btn"
+        style="@style/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/cardbg"
+        android:drawableEnd="@drawable/baseline_arrow_forward_24"
+        android:drawablePadding="4dp"
+        android:drawableTint="@color/white"
+        android:padding="16dp"
+        android:text="View the events taking place"
+        android:textAlignment="viewStart"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
     <TextView
         android:id="@+id/email_tv"
         android:layout_width="wrap_content"
@@ -107,14 +124,13 @@
 
     <View
         android:id="@+id/view"
-        android:layout_width="351dp"
+        android:layout_width="match_parent"
         android:layout_height="61dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/cardbg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/class_tv2" />
+        app:layout_constraintTop_toBottomOf="@+id/qr_btn" />
 
     <TextView
         android:id="@+id/score_tv"
